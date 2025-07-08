@@ -46,7 +46,8 @@ contract BASToken is Pausable, ERC20Capped, AccessControl {
         _unpause();
     }
 
-
+    /// @notice Set the minter address by granting MINTER_ROLE to the specified address.
+    /// @param minter The address to be granted the MINTER_ROLE.
     function setMinter(address minter) external onlyRole(DEFAULT_ADMIN_ROLE) {
         require(minter != address(0), "Minter cannot be zero address");
         _grantRole(MINTER_ROLE, minter);
