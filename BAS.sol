@@ -46,6 +46,13 @@ contract BASToken is Pausable, ERC20Capped, AccessControl {
         _unpause();
     }
 
+
+    function setMinter(address minter) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        require(minter != address(0), "Minter cannot be zero address");
+        _grantRole(MINTER_ROLE, minter);
+    }
+
+
     /// @notice Allows the minter to mint new tokens, up to the cap.
     /// @param to The address that will receive the minted tokens.
     /// @param amount The amount of tokens to mint.
