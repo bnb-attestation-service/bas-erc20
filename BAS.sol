@@ -53,7 +53,6 @@ contract BASToken is Pausable, ERC20Capped, AccessControl {
         _grantRole(MINTER_ROLE, minter);
     }
 
-
     /// @notice Allows the minter to mint new tokens, up to the cap.
     /// @param to The address that will receive the minted tokens.
     /// @param amount The amount of tokens to mint.
@@ -97,6 +96,7 @@ contract BASToken is Pausable, ERC20Capped, AccessControl {
         super._beforeTokenTransfer(from, to, amount);
     }
 
+
     /// @notice Recover ERC20 tokens mistakenly sent to this contract.
     /// @param token The address of the ERC20 token contract.
     /// @param to The address to receive the recovered tokens.
@@ -109,4 +109,3 @@ contract BASToken is Pausable, ERC20Capped, AccessControl {
         require(success, "ERC20 transfer failed");
     }
 }
-
