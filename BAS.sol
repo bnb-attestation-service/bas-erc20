@@ -96,5 +96,17 @@ contract BASToken is Pausable, ERC20Capped, AccessControl {
         }
         super._beforeTokenTransfer(from, to, amount);
     }
+
+    /// @notice Recover ERC20 tokens mistakenly sent to this contract.
+    /// @param token The address of the ERC20 token contract.
+    /// @param to The address to receive the recovered tokens.
+    /// @param amount The amount of tokens to recover.
+    function recoverERC20(address token, address to, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        require(to != address(0), "cannot send to zero address");
+        require(token != address(0), "token address cannot be zero");
+        require(amount > 0, "amount must be greater than zero");
+        bool success = IERC20(token).transfer(to, amount);
+        require(success, "ERC20 transfer failed");
+    }
 }
 
